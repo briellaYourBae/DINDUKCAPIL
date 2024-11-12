@@ -1,0 +1,75 @@
+body {
+    background-color: white;
+    padding-top: 70px;
+}
+.navbar {
+    margin-bottom: -20px;
+    background-color: #17a2b8;
+}
+.navbar-brand, .nav-link, .navbar-toggler-icon {
+    color: white !important;
+}
+.navbar-toggler {
+    border: none;
+}
+.header {
+    background-color: white;
+    color: black;
+    padding: 20px 0;
+    text-align: center;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+.dropdown-menu a {
+    color: #007bff !important;
+}
+
+/* Tambahan style untuk card */
+.card-body {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card-content {
+    flex: 0 0 auto;
+    max-width: 310px;
+}
+
+.card-info {
+    margin-top: 65px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+}
+
+.card-text {
+    margin-bottom: 20px;
+}
+
+.btn-container {
+    text-align: right;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .card-body {
+        flex-direction: column;
+    }
+    
+    .card-content {
+        max-width: 100%;
+    }
+
+    .btn-container {
+        text-align: center;
+    }
+}
+.footer {
+    color: black;
+    text-align: center;
+    font-size: 15px;
+}
