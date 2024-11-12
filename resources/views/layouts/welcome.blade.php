@@ -5,15 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="icon" href="vendor/adminlte/dist/img/logobms.png" type="png/jpg"> -->
     <title>DINDUKCAPIL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             background-color: white;
             padding-top: 70px;
+            /* dark */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding-top: 70px;
+            transition: background-color 0.3s, color 0.3s;
         }
         .navbar {
             margin-bottom: -20px;
             background-color: #17a2b8;
+            /* darkmode */
+            background-color: var(--nav-bg);
+            transition: background-color 0.3s;
         }
         .navbar-brand, .nav-link {
             color: white !important;
@@ -37,6 +46,11 @@
         }
 
         /* Tambahan style untuk card */
+        .card {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
         .card-body {
             display: flex;
             flex-direction: row;
@@ -66,27 +80,35 @@
             margin-top: 20px;
         }
         .faq-header {
-            background: linear-gradient(#17a2b8, blue, #17a2b8);
+            background: #17a2b8;
             color: white;
             padding: 2rem 0;
             margin-bottom: 2rem;
+            /* darkmode */
+            background: var(--header-gradient);
         }
         
         .accordion-button:not(.collapsed) {
-            /* background-color: #e7f1ff; */
-            /* color: #0c63e4; */
+            background-color: #e7f1ff;
+            color: #0c63e4;
         }
         
         .requirement-card {
             border-radius: 8px;
             margin-bottom: 1rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            /* darkmode */
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
         }
         
         .requirement-card .card-header {
             background-color: #f8f9fa;
             border-bottom: 2px solid #e9ecef;
             padding: 1rem;
+            /* darkmode */
+            background-color: var(--card-bg);
+            border-bottom: 2px solid var(--border-color);
         }
         
         .requirement-list {
@@ -136,6 +158,45 @@
             text-align: center;
             font-size: 15px;
         }
+
+        /* dark mod*/
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --nav-bg: #17a2b8;
+            --card-bg: #ffffff;
+            --border-color: rgba(0,0,0,.15);
+            --header-gradient: #17a2b8;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --nav-bg: #17a2b8;
+            --card-bg: #2d2d2d;
+            --border-color: rgba(0,0,0,.15);
+            --header-gradient: #17a2b8;
+        }
+
+        /* Dark Mode Toggle Button */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background-color: var(--nav-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.4s;
+        }
+
+        .dark-mode-toggle i {
+            color: white;
+            font-size: 1.5rem;
+        }
     </style>
 </head>
 <body>
@@ -144,6 +205,9 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
             <div class="d-flex align-items-center ml-3">
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>     
+                </button>
                 <a class="navbar-brand" href="http://127.0.0.1:8000/">
                     <img src="{{ asset('vendor/adminlte/dist/img/logobms.png') }}" alt="Logo" style="width: 48px; height: 48px;" class="mr-2">
                 </a> 
@@ -641,4 +705,35 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
+<script>
+        function toggleDarkMode() {
+            const body = document.documentElement;
+            const currentTheme = body.getAttribute('data-theme');
+            const icon = document.querySelector('.dark-mode-toggle i');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check for saved theme preference
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('theme');
+            const icon = document.querySelector('.dark-mode-toggle i');
+            
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+    </script>
 </html>
